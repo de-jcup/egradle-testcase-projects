@@ -1,0 +1,20 @@
+subprojects {
+    apply plugin: 'java'
+	apply plugin: 'eclipse'
+	apply from: "${rootProject.projectDir}/libraries.gradle"
+	
+	/* turn off doclint java 8 */
+	if (JavaVersion.current().isJava8Compatible()) {
+	        tasks.withType(Javadoc) {
+	            options.addStringOption('Xdoclint:none', '-quiet')
+	        }
+	}
+	repositories {
+		mavenCentral()
+    }
+	dependencies{
+		testCompile library.junit
+		testCompile library.mockito_all
+	}
+}
+

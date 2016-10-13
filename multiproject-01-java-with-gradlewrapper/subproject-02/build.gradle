@@ -1,0 +1,5 @@
+dependencies{
+	compile project(':subproject-01')
+}
+
+
