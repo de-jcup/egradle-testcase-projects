@@ -1,0 +1,25 @@
+// This is an example usable to test gradle editor does string highlighting correct...
+// http://mrhaki.blogspot.de/2009/08/groovy-goodness-string-strings-strings.html
+
+// Single quotes:
+def s1 = 'Yep this is a string, and we can use "double quotes" without escaping them.'
+def m1 = '''With three quotes
+we can write multi-line strings, without all
+the hassle of concatenation.'''
+ 
+// Double quotes:
+def s2 = "Also a string, and of course we can use 'single quotes' without escaping them."
+def m2 = """\
+With three double quotes we can have a multi-line string,
+and we don't need to add extra + signs. Very easy for
+copy-paste."""
+ 
+// Slashy (also multi-line possible):
+def s3 = /Well almost everything goes in a "slashy" 'string' without escaping. Good for readable regular expressions!/
+ 
+// Dollar slashy:
+def s4 = $/
+Like a 'slashy' string, but with different escaping rules
+for slashes ("/")
+/$
+

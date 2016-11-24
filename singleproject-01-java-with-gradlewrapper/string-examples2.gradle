@@ -1,0 +1,35 @@
+// This is an example usable to test gradle editor does string highlighting correct...
+// http://mrhaki.blogspot.de/2009/08/groovy-goodness-string-strings-strings.html
+
+// Simple Groovy expressions can be used:
+def user = new Expando(name: 'mrhaki', email: 'mail@email.com')
+def gs1 = "Hi, your name is ${user?.name}. If I shout I will call you ${user?.name?.toUpperCase()}!"
+println gs1 // Output: Hi, your name is mrhaki. If I shout I will call you MRHAKI!
+ 
+// Works also in triple double quoted multi-line strings:
+def mailMessage = """
+Hi ${user?.name},
+ 
+thank you for signing up.
+You signed up wit the following e-mail address:
+ 
+${user?.email}
+ 
+Kind regards,
+ 
+the support team.
+"""
+println mailMessage
+ 
+// We can use closures in GStrings to do lazy evaluation.
+// The closure is evaluated when the toString() method on the
+// GString is invoked instead of when the GString is created.
+// Closures can have zero or one arguments. With one argument we get a writer
+// object we can write to, with zero arguments the toString() is called on the
+// closure.
+def directEval = "Current name value is ${user.name} and email is ${user.email}."
+def lazyEval = "Current name value is ${ -> user.name } and email is ${ out -> out << user.email }."
+user.name = 'changed username'
+user.email = 'changed email'
+println directEval // Output: Current name value is mrhaki and email is mail@email.com.
+println lazyEval // Output: Current name value is changed username and email is changed email.
